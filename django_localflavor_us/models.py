@@ -12,6 +12,9 @@ class USStateField(CharField):
         kwargs['max_length'] = 2
         super(USStateField, self).__init__(*args, **kwargs)
 
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
+
 class USPostalCodeField(CharField):
 
     description = _("U.S. postal code (two uppercase letters)")
