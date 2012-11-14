@@ -12,9 +12,6 @@ class USStateField(CharField):
         kwargs['max_length'] = 2
         super(USStateField, self).__init__(*args, **kwargs)
 
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
-
 class USPostalCodeField(CharField):
 
     description = _("U.S. postal code (two uppercase letters)")
@@ -37,3 +34,8 @@ class PhoneNumberField(CharField):
         defaults = {'form_class': USPhoneNumberField}
         defaults.update(kwargs)
         return super(PhoneNumberField, self).formfield(**defaults)
+
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
+add_introspection_rules([], ["^django_localflavor_us\.models\.USPostalCodeField"])
+add_introspection_rules([], ["^django_localflavor_us\.models\.PhoneNumberField"])
