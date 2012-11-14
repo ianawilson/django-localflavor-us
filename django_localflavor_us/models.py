@@ -35,7 +35,22 @@ class PhoneNumberField(CharField):
         defaults.update(kwargs)
         return super(PhoneNumberField, self).formfield(**defaults)
 
+class ZipCodeField(RegexField):
+
+    description = _("Zipcode")
+
+    def __init__(self, *args, **kwargs):
+        kwargs['max_length'] = 20
+        super(ZipCodeField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        from django.contrib.localflavor.us.forms import USZipCodeField
+        defaults = {'form_class': USZipCodeField}
+        defaults.update(kwargs)
+        return super(ZipCodeField, self).formfield(**defaults)
+
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 add_introspection_rules([], ["^django_localflavor_us\.models\.USPostalCodeField"])
 add_introspection_rules([], ["^django_localflavor_us\.models\.PhoneNumberField"])
+add_introspection_rules([], ["^django_localflavor_us\.models\.ZipCodeField"])
