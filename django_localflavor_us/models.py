@@ -35,12 +35,12 @@ class PhoneNumberField(CharField):
         defaults.update(kwargs)
         return super(PhoneNumberField, self).formfield(**defaults)
 
-class ZipCodeField(CharField):
+class USZipCodeField(CharField):
 
     description = _("Zipcode")
 
     def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 20
+        kwargs['max_length'] = 10
         super(ZipCodeField, self).__init__(*args, **kwargs)
 
     def formfield(self, **kwargs):
@@ -48,9 +48,16 @@ class ZipCodeField(CharField):
         defaults = {'form_class': USZipCodeField}
         defaults.update(kwargs)
         return super(ZipCodeField, self).formfield(**defaults)
+    
 
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
-add_introspection_rules([], ["^django_localflavor_us\.models\.USPostalCodeField"])
-add_introspection_rules([], ["^django_localflavor_us\.models\.PhoneNumberField"])
-add_introspection_rules([], ["^django_localflavor_us\.models\.ZipCodeField"])
+# gracefully fail south introspection if south is not available
+try:    
+    from south.modelsinspector import add_introspection_rules
+    
+    add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
+    add_introspection_rules([], ["^django_localflavor_us\.models\.USPostalCodeField"])
+    add_introspection_rules([], ["^django_localflavor_us\.models\.PhoneNumberField"])
+    add_introspection_rules([], ["^django_localflavor_us\.models\.ZipCodeField"])
+except ImportError:
+    pass
+

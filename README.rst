@@ -45,6 +45,9 @@ What's in the U.S.A. localflavor?
   ``forms.USPSSelect`` field and stores the two-letter U.S Postal Service
   abbreviation in the database.
 
+* models.USZipCodeField: A model field that forms represent as a
+  ``forms.USZipCodeField`` field and stores a U.S. zipcode in a valid format.
+
 Additionally, a variety of choice tuples are provided in
 ``us.us_states``, allowing customized model and form fields, and form
 presentations, for subsets of U.S states, territories and U.S Postal Service
