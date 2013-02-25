@@ -51,12 +51,11 @@ class USZipCodeField(CharField):
 
 # gracefully fail south introspection if south is not available
 try:    
-    from south.modelsinspector import add_introspection_rules
-    
+    from south.modelsinspector import add_introspection_rules    
+except ImportError:
+    pass
+else:
     add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
     add_introspection_rules([], ["^django_localflavor_us\.models\.USPostalCodeField"])
     add_introspection_rules([], ["^django_localflavor_us\.models\.PhoneNumberField"])
     add_introspection_rules([], ["^django_localflavor_us\.models\.USZipCodeField"])
-except ImportError:
-    pass
-
